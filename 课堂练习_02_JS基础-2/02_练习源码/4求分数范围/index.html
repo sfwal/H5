@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<span>请输入你的分数:</span><input type="number" placeholder="(范围:0-100)" id="grade"/>
+		<button id="cel">计算分数段</button>
+		
+		<script>
+			// 获取标签
+			var gradeInput = document.getElementById("grade");
+			var celBtn = document.getElementById("cel");
+			
+			// 绑定点击事件
+			celBtn.onclick = function(){
+				// 获取用户输入的分数
+				var gradeNum = parseInt(gradeInput.value);
+				
+				// 判断输入的值要在0-100之间 取反, 就是不在这个范围内的
+				if (!(gradeNum > 0 && gradeNum < 100)){
+					alert("请输入0-100之间的值!");
+					return; // 阻止代码继续向下执行
+				}
+				
+				// 判定条件:
+				// 90-100 优秀
+				// 80-89 良好
+				// 70-79 中
+				// 60-69 及格
+				// 0-59 不及格
+				
+				// 因为90-100是优秀, 所以分数除以10, 结果要么是9, 要么是10, 所以无论是9还是10, 你都是优秀
+				// 除以10是小数, 我们要取整数位
+				var gNum = parseInt(gradeNum / 10);
+				switch (gNum){
+					case 9:
+					case 10:
+						alert("优秀");
+					break;
+					case 8:
+						alert("良好");
+					break;
+					case 7:
+						alert("中");
+					break;
+					case 6:
+						alert("及格");
+					break;
+					default:
+						alert("不及格");
+				}
+			}
+		</script>
+	</body>
+</html>

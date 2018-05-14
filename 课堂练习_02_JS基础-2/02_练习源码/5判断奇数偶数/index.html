@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<span>请输入数字:</span><input type="number" id="num"/>
+		<button id="cel">判断</button>
+		
+		<script>
+			// 获取标签
+			var numInput = document.getElementById("num");
+			var celBtn = document.getElementById("cel");
+			
+			// 绑定点击事件
+			celBtn.onclick = function(){
+				// 获取用户输入的值
+				var num = parseInt(numInput.value);
+				
+				// 接收奇数还是偶数结果字符串
+				var result = num % 2 == 0 ? "偶数" : "奇数";
+				alert(result);
+			}
+		</script>
+	</body>
+</html>

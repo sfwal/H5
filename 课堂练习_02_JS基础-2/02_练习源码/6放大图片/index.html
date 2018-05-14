@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<button id="one">x1</button>
+		<button id="two">x2</button>
+		<button id="three">x3</button>
+		<br />
+		<img src="img/logo.jpeg" alt="" id="theImg"/>
+		
+		<script>
+			// 获取图片标签和3个按钮标签
+			var targetImg = document.getElementById("theImg");
+			var oneBtn = document.getElementById("one");
+			var twoBtn = document.getElementById("two");
+			var threeBtn = document.getElementById("three");
+			
+			// 注意在图片资源加载完毕时触发方法
+			window.onload = function(){
+				// 获取图片可视区域宽度和高度
+				var imgW = targetImg.offsetWidth;
+				var imgH = targetImg.offsetHeight; 
+				
+				// 给1倍按钮绑定事件
+				oneBtn.onclick = function(){
+					targetImg.style.width = imgW + "px";
+					targetImg.style.height = imgH + "px";
+				}
+				// 给2倍按钮绑定事件
+				twoBtn.onclick = function(){
+					targetImg.style.width = imgW * 2 + "px";
+					targetImg.style.height = imgH * 2 + "px";
+				}
+				// 给3倍按钮绑定事件
+				threeBtn.onclick = function(){
+					targetImg.style.width = imgW * 3 + "px";
+					targetImg.style.height = imgH * 3 + "px";
+				}
+				
+			}
+			
+		</script>
+	</body>
+</html>

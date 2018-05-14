@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<span>请输入年份:</span><input type="number" id="year"/>
+		<button id="cel">计算一下</button>
+		
+		<script>
+			// 获取年份输入框标签, 和按钮标签
+			var yearInput = document.getElementById("year");
+			var celBtn = document.getElementById("cel");
+			// 绑定点击事件
+			celBtn.onclick = function(){
+				// 获取用户输入的年份
+				var year = parseInt(yearInput.value);
+				
+				// 判断是否为闰年, 闰年的判定条件: 能被4整除且不能被100整除, 或者能被400整除
+				if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0){ // 满足这个if判断条件即为闰年
+					alert(year + " 是闰年!");
+				} else {
+					alert(year + " 不是闰年!");
+				}
+				
+			}
+		</script>
+	</body>
+</html>

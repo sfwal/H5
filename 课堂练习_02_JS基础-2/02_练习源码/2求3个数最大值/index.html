@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+		// 声明3个变量, 求这3个里最大值
+			var a = 15;
+			var b = 19;
+			var c = 21;
+		// 声明变量max, 用于保存最大值
+			var max;
+		// 比较a和b中最大值
+			if (a > b){
+				max = a;
+			} else { // 如果走else了, 说明a大于b不成立, 那就是b大了.
+				max = b;
+			}
+		// max已经保存a和b中最大的那个值了, 然后再用max和c比较
+			if (c > max){
+				max = c; // 如果c大, 就保存c的值
+			}
+		// 最后, max里保存的就是最大的值了, 输出一下
+			alert("最大值为: " + max);
+			
+		</script>
+	</body>
+</html>

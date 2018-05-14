@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#myDiv{
+				background-color: green;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myDiv" style="width: 200px; height: 200px;"></div>
+		
+		<script>
+		// 获取div标签
+			var theDiv = document.getElementById("myDiv");
+			
+		// 给div绑定点击事件
+		theDiv.onclick = function(){
+			// 获取当前标签宽度和高度
+			var theW = parseInt(theDiv.style.width); // 获取的宽高都是带px的字符串, 需要转换成整型, 才能在下面进行比较.
+			var theH = parseInt(theDiv.style.height);
+			
+			// 判断当前标签是放大还是缩小状态
+			if (theW == 200 && theH == 200){ // 缩小状态(默认大小)
+				theDiv.style.width = theW * 2 + "px"; // 宽度*2, 然后别忘了加单位
+				theDiv.style.height = theH * 2 + "px";
+				// 高度 * 2
+			} else if (theW == 400 && theH == 400){
+				// 当前标签宽度除以2, 得到的结果拼接单位赋回给标签的width属性, 标签宽度就缩小一半了
+				theDiv.style.width = theW / 2 + "px";
+				// 高度缩小一半
+				theDiv.style.height = theH / 2 + "px";
+			}
+		}
+		
+		</script>
+	</body>
+</html>
