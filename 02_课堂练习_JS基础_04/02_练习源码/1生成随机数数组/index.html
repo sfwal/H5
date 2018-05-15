@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		//练习, 定义一个数组, 数组中有10个元素, 随机为每一个元素赋值, 取值范围[15, 30](整型)
+		var array1 = [];
+		for (var i = 0; i < 10; i++) {
+			array1[i] = Math.floor(Math.random() * 16 + 15);
+			//方式1
+			console.log("第" + (i + 1) + "个元素：" + array1[i]);
+		}
+		//方式2
+		console.log("生成的数组为：" + array1);
+	</script>
+</body>
+
+</html>

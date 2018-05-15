@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			//练习, 随机生成数组A，20个元素，取值范围[6, 66]，将奇数位置元素存到B数组中，偶数元素存到C数组中
+			var arrayA = [];
+			for(var i = 0; i < 20; i++) {
+				arrayA[i] = Math.floor(Math.random() * 61 + 6);;
+			}
+			console.log("生成的数组A:" + arrayA);
+
+			var arrayB = [],
+				arrayC = [];
+			for(var i = 0; i < 20; i++) {
+				if(i % 2 == 0) {
+					arrayB[Math.floor(i / 2)] = arrayA[i];
+				} else {
+					arrayC[Math.floor(i / 2)] = arrayA[i];
+				}
+			}
+			console.log("生成的数组B:" + arrayB);
+			console.log("生成的数组C:" + arrayC);
+		</script>
+	</body>
+
+</html>

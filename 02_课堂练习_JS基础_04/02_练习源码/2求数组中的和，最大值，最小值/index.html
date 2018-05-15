@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			//练习, 定义一个数组, 10个元素, 随机赋值[10, 40], 求元素之和, 最大值, 最小值
+			var array2 = [];
+			var sum = 0,
+				max = 10,
+				min = 40;
+			for(var i = 0; i < 10; i++) {
+				array2[i] = Math.floor(Math.random() * 31 + 10);
+				sum += array2[i];
+				max = max > array2[i] ? max : array2[i];
+				min = min < array2[i] ? min : array2[i];
+			}
+			console.log("生成的数组:" + array2);
+			console.log("数组之和:" + sum);
+			console.log("数组中的最大值:" + max);
+			console.log("数组中的最小值:" + min);
+		</script>
+	</body>
+
+</html>

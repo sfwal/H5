@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			//练习, 求三个数的中间值的函数, 并计算10，15，20的中间值
+			function middleValue(a, b, c) {
+				var max = a > b ? a : b;
+				max = max > c ? max : c;
+
+				var min = a < b ? a : b;
+				min = min < c ? min : c;
+
+				var mid = a + b + c - max - min;
+				return mid;
+			}
+			
+			console.log("中间值为：" + middleValue(10, 15, 20));
+			
+		</script>
+	</body>
+
+</html>

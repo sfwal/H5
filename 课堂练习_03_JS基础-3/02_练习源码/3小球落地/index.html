@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var height = 100; // 代表从100米高度
+			var num = 0; // 反弹的次数
+			while (height > 0.01){ // 如果高度大于0.01继续循环
+				// 把当前高度除以2
+				height /= 2; 
+				num++; // num值增加1, 代表弹起来一次
+			}
+			document.body.innerHTML = num + "次"; // 把结果显示在页面上
+			
+		</script>
+	</body>
+</html>

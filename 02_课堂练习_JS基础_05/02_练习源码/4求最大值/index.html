@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//练习: 获取两个数的最大值
+			function maxTwo (a, b) {
+				var max = a > b ? a : b;
+				return max;
+			}
+			console.log(maxTwo(1, 2));
+			
+			//练习: 求三个数的最大值
+			function maxThree (a, b, c) {
+				//1
+				var max = a > b ? a : b;
+				max = max > c ? max : c;
+				return max;
+				//2
+				return maxTwo(maxTwo(a, b), c);
+			}
+			console.log(maxThree(12, 21, 15));
+			
+			//练习: 求四个数的最大值
+			function maxFour (a, b, c, d) {
+				//1
+				return maxTwo(maxTwo(a, b), maxTwo(c, d));
+				//2
+				return maxTwo(maxThree(a, b, c), d);
+				//3
+				return maxTwo(maxTwo(maxTwo(a, b), c), d);
+				//4
+				var arr = [a, b, c, d];
+				var max = a;
+				for (var i = 1; i < 4; i++) {
+					max = max > arr[i] ? max : arr[i];
+				}
+				return max;
+			}
+			console.log(maxFour(1, 2, 3, 4));
+		</script>
+	</body>
+</html>

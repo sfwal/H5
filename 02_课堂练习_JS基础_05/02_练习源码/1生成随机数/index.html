@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script type="text/javascript">
+			//练习: 写一个产生[x, y]的随机数函数, 并产生10个[10, 100]的随机数
+			function randomNumber(x, y) {
+				var num = Math.floor(Math.random() * (y - x + 1) + x);
+				return num;
+			}
+
+			console.log("产生10个随机数：");
+			for(var i = 0; i < 10; i++) {
+				console.log(randomNumber(10, 100));
+			}
+		</script>
+	</body>
+
+</html>

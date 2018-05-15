@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			// 循环拿出100-999每个数字, 
+			for (var i = 100; i < 1000; i++){
+				// 获取百位数字
+				var bai = Math.floor(i / 100);
+				// 获取十位数字
+				var shi = Math.floor(i / 10) % 10;
+				// 获取个位数字
+				var ge = i % 10;
+				
+				// 判断是否为水仙花数
+				if (Math.pow(bai, 3) + Math.pow(shi, 3) + Math.pow(ge, 3) == i){
+					// 把水仙花数结果, 输出到页面上
+					document.write(i + " ");
+				}
+			}
+		</script>
+	</body>
+</html>

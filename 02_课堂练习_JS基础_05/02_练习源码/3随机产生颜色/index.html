@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//练习, 随机产生一个rgb颜色，格式为rgb(0, 255, 0)
+			function randomColor () {
+				var red = Math.floor(Math.random() * 256);
+				var green = Math.floor(Math.random() * 256);
+				var blue = Math.floor(Math.random() * 256);
+
+				var rgbString = "rgb(" + red + "," + green + "," + blue + ")";
+				return rgbString;
+			}
+			console.log(randomColor());
+		</script>
+	</body>
+</html>
