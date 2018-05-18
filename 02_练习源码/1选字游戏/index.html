@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- 强制IE浏览器采用最新的edge引擎解析，chrome采用最新版本 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 双模式浏览器优先使用 webkit -->
+		<meta name="renderer" content="webkit">
+		<!-- 移动端视窗设置 -->
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/> -->
+		<!-- title 标题 -->
+		<title>选字游戏</title>
+		<!-- 描述 -->
+		<meta name="description" content="你的描述内容，一段完整的描述，150字以内">
+		<!-- 关键字 -->
+		<meta name="keywords" content="多个关键词用英文,号分割">
+		<!-- 引入CSS -->
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+	</head>
+
+	<body>
+		<div class="wrap">
+			<div id="time">剩余时间:60</div>
+			<div id="count">数量:0</div>
+			<div id="question">字</div>
+			<ul id="answer">
+				<li>红</li>
+				<li>黄</li>
+				<li>蓝</li>
+				<li>绿</li>
+				<li>紫</li>
+			</ul>
+		</div>
+
+		<script type="text/javascript">
+			var texts = ["红", "黄", "蓝", "绿", "紫"];
+			var colors = ["red", "yellow", "blue", "green", "purple"];
+
+			//随机数
+			function randomNumber(x, y) {
+				return Math.floor(Math.random() * (y - x + 1) + x);
+			}
+
+			var answer;
+			//随机题目
+			function randomQuestion() {
+				var questionDiv = document.getElementById("question");
+				questionDiv.innerHTML = texts[randomNumber(0, 4)];
+				var color = colors[randomNumber(0, 4)];
+				questionDiv.style.color = color;
+
+				if(color == "green") {
+					answer = "绿";
+				} else if(color == "red") {
+					answer = "红";
+				} else if(color == "yellow") {
+					answer = "黄";
+				} else if(color == "blue") {
+					answer = "蓝";
+				} else if(color == "purple") {
+					answer = "紫";
+				}
+			}
+			randomQuestion();
+
+			//洗牌算法
+			function randomArray(arr) {
+				//遍历数组, 依次洗牌
+				for(var i = 0; i < arr.length; i++) {
+					//随机某个位置
+					var num = randomNumber(0, arr.length - 1);
+					//如果随机的位置和当前位置不一致, 进行交换
+					if(i != num) {
+						var temp = arr[i];
+						arr[i] = arr[num];
+						arr[num] = temp;
+					}
+				}
+			}
+
+			var lis = document.getElementsByTagName("li");
+			//随机答案
+			function randomAnswer() {
+				randomArray(texts);
+				randomArray(colors);
+				for(var i = 0; i < lis.length; i++) {
+					lis[i].innerHTML = texts[i];
+					lis[i].style.color = colors[i];
+				}
+			}
+			randomAnswer();
+
+			//剩余时间
+			var time = 60;
+			var timeDiv = document.getElementById("time");
+
+			function minusTime() {
+				time--;
+				timeDiv.innerHTML = "剩余时间:" + time;
+				if(time == 0) {
+					clearInterval(timerID);
+					alert("game over");
+				}
+			}
+			var timerID = setInterval("minusTime()", 1000);
+
+			var count = 0;
+			var countDiv = document.getElementById("count");
+			//li关联方法
+			function clickLi() {
+				if(this.innerHTML == answer) {
+					count++;
+					countDiv.innerHTML = "数量:" + count;
+					randomAnswer();
+					randomQuestion();
+				}
+			}
+
+			for(var i = 0; i < lis.length; i++) {
+				lis[i].onclick = clickLi;
+			}
+		</script>
+	</body>
+
+</html>

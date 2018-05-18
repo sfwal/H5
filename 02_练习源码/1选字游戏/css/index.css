@@ -1,0 +1,36 @@
+.wrap {
+	width: 400px;
+	height: 600px;
+	margin: 0 auto;
+	border: 1px solid black;
+}
+
+#time {
+	float: left;
+}
+
+#count {
+	float: right;
+}
+
+#time,
+#count {
+	font-size: 35px;
+}
+
+#question {
+	clear: both;
+	font-size: 200px;
+	text-align: center;
+}
+
+#answer {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-around;
+	margin-top: 200px;
+}
+
+#answer>li {
+	font-size: 55px;
+}
