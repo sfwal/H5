@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		*,body{padding: 0;margin: 0;list-style: none;}
+		#banner{width: 800px; height: 400px;overflow: hidden;position: relative;border: 1px solid #ddd;}
+		#list{position: absolute;left: 0;top: 0;width: 500%;height: 400px;transition: all 0.5s;-webkit-transition: all 0.5s; -moz-transition: all 0.5s;-o-transition: all 0.5s;}
+		#list li{float: left;width: 800px;height: 400px;}
+		#list li img{width: 800px;height: 400px;}
+		#buttons{position: absolute;bottom: 20px;left: 50%;margin-left: -105px;}
+		#buttons li{width: 15px; height: 15px;background: rgba(255,255,255,0.8);border-radius: 50%;margin-right: 15px;float: left;cursor: pointer;}
+		#buttons li.active{background: #f00;}
+		#banner #prev,#banner #next{width: 40px; height: 80px;display: block;position: absolute;background: rgba(0,0,0,0.8);color:#fff;text-align: center;line-height: 80px;font-family: "宋体";font-size: 28px;top: 50%; margin-top: -40px;text-decoration: none;}
+		#banner #prev{left: 0;}
+		#banner #next{right: 0;}
+	</style>
+</head>
+<body>
+	<div id="banner">
+		<ul id="list">
+			<li><img src="images/1.jpg" /></li>
+			<li><img src="images/2.jpg" /></li>
+			<li><img src="images/3.jpg" /></li>
+			<li><img src="images/4.jpg" /></li>
+			<li><img src="images/5.jpg" /></li>
+		</ul>
+		<ul id="buttons">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<a href="javascript:;" id="prev">&lt;</a>
+		<a href="javascript:;" id="next">&gt;</a>
+	</div>
+	<script>
+		window.onload = function(){
+
+			//定义一个函数来获取ID为X的dom
+			function $(a){
+				return document.getElementById(a);
+			}
+			//定义选中小圆点的下标
+			var current = 0;
+			var bunLi = $('buttons').getElementsByTagName('li');
+			//通过下标来定义的滚动函数
+			function scroll(){
+				for(var i=0;i<$('buttons').getElementsByTagName('li').length;i++){
+					$('buttons').getElementsByTagName('li')[i].className = "";
+				}
+				$('buttons').getElementsByTagName('li')[current].className = "active";
+				$('list').style.left = -$('list').getElementsByTagName('li')[0].offsetWidth * current + 'px';
+			}
+			scroll();
+			//next按钮点击事件
+			$('next').onclick = function(){
+				current++;
+				if(current==$('list').getElementsByTagName('li').length){
+					current = 0;
+				}
+				scroll();
+			}
+			//prev按钮点击事件
+			$('prev').onclick = function(){
+				current--;
+				if(current==-1){
+					current = $('list').getElementsByTagName('li').length - 1;
+				}
+				scroll();
+			}
+
+			//小圆点点击事件
+			for(var j=0; j<bunLi.length; j++){
+				bunLi[j].index = j;
+				bunLi[j].onclick = function(){
+					current = this.index;
+					scroll();
+				}
+			}
+
+			//自动播放定时器
+			var timer = setInterval(function(){
+				current++;
+				if(current==$('list').getElementsByTagName('li').length){
+					current = 0;
+				}
+				scroll();
+			},2000);
+
+			//清除定时器
+			$('banner').onmouseover = function(){
+				clearInterval(timer);
+			}
+
+			//重新加载定时器
+			$('banner').onmouseout = function(){
+				timer = setInterval(function(){
+					current++;
+					if(current==$('list').getElementsByTagName('li').length){
+						current = 0;
+					}
+					scroll();
+				},2000);
+			}
+		}
+	</script>
+</body>
+</html>
