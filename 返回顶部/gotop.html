@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		body{padding: 0;margin:0; background: #000;height: 3000px;}
+		#gotop{width: 50px; height: 50px;background: #f00;position: fixed;right: 20px; bottom: 60px;display: none;cursor: pointer;}
+	</style>
+</head>
+<body>
+	<div id="gotop"></div>
+	<script>
+		window.onload = function(){
+			var goTop = document.getElementById('gotop')
+			// window.onscroll，当滚动浏览器滚动条时执行事件
+			window.onscroll = function(){
+				//获取浏览器滚动条滚动距离
+				var top1 = document.body.scrollTop || document.documentElement.scrollTop;
+				//当浏览器滚动距离大于300的时候，显示按钮。
+				if(top1 > 300){
+					goTop.style.display = "block" ;
+				}else{
+					goTop.style.display = "none" ;
+				}
+			}
+			goTop.onclick = function(){
+				//定义一个初始速度，越大则滚动的越快
+				var speed = 100;
+				// 定义一个计时器
+				var scrollTop = setInterval(function(){
+					// 获取浏览器的滚动距离
+					var top2 = document.body.scrollTop || document.documentElement.scrollTop;
+					// 当浏览器滚动条回到顶部时清除定时器
+					if(top2 <= 0){
+						clearInterval(scrollTop);
+					}else{
+						// 因为有浏览器兼容问题存在，所以要判断是否能获取到 document.body.scrollTop的值。
+						if(document.body.scrollTop){
+							document.body.scrollTop = document.body.scrollTop - speed;
+						}else{
+							document.documentElement.scrollTop -= speed;
+						}
+					}
+				},20)
+			}
+		}
+	</script>
+</body>
+</html>

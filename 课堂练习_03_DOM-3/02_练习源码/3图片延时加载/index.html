@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img id="myImg" src="" data-src="img/1.jpg"/>
+	</body>
+	<script type="text/javascript">
+		var theImg = document.getElementById("myImg");
+		document.onclick = function (){
+			theImg.src = theImg.getAttribute("data-src");
+		}
+	</script>
+</html>

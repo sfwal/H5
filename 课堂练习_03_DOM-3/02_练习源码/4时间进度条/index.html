@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#myDiv{
+				width: 400px;
+				height: 40px;
+				background-color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myDiv"></div>
+		<script>
+			// 获取标签
+			var theDiv = document.getElementById("myDiv");
+			var theW = theDiv.offsetWidth;
+			// 每0.1秒变化的速度, 所以30秒的话需要乘以10, 所以就是300
+			var speed = theW / 300;
+			// 计时器每0.1秒减少
+			var t = setInterval(function(){
+				theW -= speed; // 每次宽度减少
+				if (theW < 0){ // 当宽度小于0了, 代表时间到
+					theW = 0; // 宽度强制等于0
+					clearInterval(t); // 清除计时器
+					alert("时间到"); // 提示
+				} else {
+					theDiv.style.width = theW + "px"; // 设置红色div宽	
+				}
+			}, 100);
+		</script>
+	</body>
+</html>

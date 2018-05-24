@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<img id="myImg" src="" alt="" />
+		
+		<script>
+			// 获取图片标签
+			var theImg = document.getElementById("myImg");
+			
+			// 准备图片数组
+			var imgUrlArr = [];
+			for (var i = 10; i < 21; i++){
+				imgUrlArr.push("img/" + i + ".jpg");
+			}
+			
+			// 记录当前图片下角标
+			var index = 0;
+			
+			// 设置计时器
+			setInterval(function(){
+				theImg.src = imgUrlArr[index];
+				index++; // 每次下角标加1
+				if (index == imgUrlArr.length){ // 当下角标加到和数组长度一样的时候, 就得让index值从头再来
+					index = 0;
+				}
+			}, 1000);
+		</script>
+	</body>
+</html>

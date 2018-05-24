@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	
+		<script>
+			// 图片预加载: 在有很多图片的时候, 如果一起加载, 用户需要等待的时间比较长, 给用户的感觉不是很好, 所以我们要让[图片预先加载到内存中], 如果需要显示到页面上, 直接显示.
+			// 1. 利用img的src属性, 预加载图片到内存中
+			var img = document.createElement("img");
+			img.src = "img/2.jpg";
+			// 2. 当图片加载完毕会触发onload方法
+			img.onload = function(){
+				// 3. 在把图片真正加载到页面上
+				document.body.appendChild(img);
+			}
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>
