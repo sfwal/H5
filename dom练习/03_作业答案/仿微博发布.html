@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        #box{
+            width:500px;
+            padding:50px;
+            margin:0 auto;
+            border:2px solid #000;
+        }
+        #text{
+            width:490px;
+            height:150px;
+            padding:5px;
+        }
+        #btn{
+            width:100px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        .div1{
+            width:488px;
+            height:50px;
+            border:1px solid #ccc;
+            padding:5px;
+            margin-top:15px;
+            position:relative;
+        }
+        .close{
+            position:absolute;
+            font-size: 16px;
+            color:#888;
+            right:4px;
+            top:4px;
+            font-family:"宋体";
+            cursor:pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <textarea id="text"></textarea>
+        <input type="button" id="btn" value="发布" disabled />
+    </div>
+    <script>
+        function $(obj){
+            return document.getElementById(obj);
+        }
+        $("text").onkeyup = function(){
+            if($("text").value == ""){
+                $("btn").setAttribute("disabled","disabled");
+            }else{
+                $("btn").removeAttribute("disabled");
+            }
+        }
+        $("btn").onclick = function(){
+            var divs = document.createElement("div");
+            var close = document.createElement("span");
+            divs.className = "div1";
+            close.className = "close";
+            close.innerHTML = "×";
+            divs.innerHTML = $("text").value;
+            $("text").value = "";
+            $("btn").setAttribute("disabled","disabled");
+
+            divs.appendChild(close);
+            $("box").appendChild(divs);
+            close.onclick = function(){
+                $("box").removeChild(divs);
+            }
+        }
+    </script>
+</body>
+</html>
