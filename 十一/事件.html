@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        body{
+            background:#000;
+        }
+        #box{
+            position:absolute;
+            width:500px;
+            height:300px;
+            left:50%;
+            top:50%;
+            margin:-150px 0 0 -250px;
+            background:#f00;
+            display:none;
+        }
+        #bb{
+            background:#00f;
+            width:300px;
+            height:400px;
+        }
+    </style>
+</head>
+<body>
+    <input type="button" id="btn" value="点击弹出" />
+    <div id="box"></div>
+    <script>
+        document.getElementById("btn").onclick = function(event){
+            //阻止事件冒泡
+            //什么时候用阻止事件冒泡：  当你的父元素和子元素执行同类别的事件。必须给子元素添加阻止事件冒泡。
+            event.stopPropagation();
+            document.getElementById("box").style.display = "block";
+        }
+        document.onclick = function(){
+            document.getElementById("box").style.display = "none";
+        }
+    </script>
+</body>
+</html>

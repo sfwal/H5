@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html{
+			height: 100%;
+		}
+		body{
+			height: 100%;
+			background-color: black;
+		}
+		#myDiv{
+			width: 50px;
+			height: 50px;
+			position: absolute;
+			left: 250px;
+			top: 450px;
+		}
+		</style>
+	</head>
+	<body>
+		<img id="myDiv" src="img/p1tankU.gif" />
+	</body>
+	
+	<script>
+		var myDiv = document.getElementById("myDiv");
+		document.onkeydown = function(ev){
+			
+			var evObj = ev || window.event;
+			switch (evObj.keyCode){
+				// 左
+				case 37:
+				myDiv.style.left = myDiv.offsetLeft - 10 + "px";
+				myDiv.src = "img/p1tankL.gif";
+				break;
+				// 上
+				case 38:
+				myDiv.style.top = myDiv.offsetTop - 10 + "px";
+				myDiv.src = "img/p1tankU.gif";
+				break;
+				// 右
+				case 39:
+				myDiv.style.left = myDiv.offsetLeft + 10 + "px";
+				myDiv.src = "img/p1tankR.gif";
+				break;
+				// 下
+				case 40:
+				myDiv.style.top = myDiv.offsetTop + 10 + "px";
+				myDiv.src = "img/p1tankD.gif";
+				break;
+				default:
+			}
+		}
+	</script>
+</html>

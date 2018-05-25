@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<form id="myForm" action="http://zhidao.baidu.com/search">
+			<input type="text" name="word" />
+			<input type="submit" value="搜索一下" />
+		</form>
+	</body>
+	<script>
+		var myForm = document.getElementById("myForm");
+		myForm.onsubmit = function(){
+			var bol = confirm("你确定要跳转到百度吗?");
+			return bol;
+			// return false; 阻止默认事件, 也就会阻止submit提交, 从而不能跳转
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</script>
+</html>

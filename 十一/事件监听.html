@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" id="btn" value="添加li" />
+    <ul id="ul">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+
+    <li><button>x</button></li>
+
+    <script>
+        var index = 4;
+        var oUl = document.getElementById("ul");
+        var liList = oUl.getElementsByTagName("li");
+        var oBtn = document.getElementById("btn");
+        oBtn.onclick = function(){
+            var tLi = document.createElement("li");
+            index += 1;
+            tLi.innerHTML = index;
+            oUl.appendChild(tLi);
+        }
+        oUl.addEventListener("mouseover",function(event){
+
+            //拿到真正触发事件的那个元素target，也就是li
+            var myTarget = event.target || event.srcElement;
+            console.log(myTarget);
+            if(myTarget.nodeName == "LI"){
+                myTarget.style.backgroundColor = "red";
+            }
+        })
+        var aaa = function(){
+
+        }
+        function aaa(){
+
+        }
+        oUl.addEventListener("mouseout",function(){
+            var myTarget = event.target || event.srcElement;
+            console.log(myTarget);
+            if(myTarget.nodeName == "LI"){
+                myTarget.style.backgroundColor = "#fff";
+            }
+        })
+        // for(var i=0;i<7;i++){
+        //     liList[i].onmouseover = function(){
+        //         this.style.backgroundColor = "red";
+        //     }
+        //     liList[i].onmouseout = function(){
+        //         this.style.backgroundColor = "#fff";
+        //     }
+        // }
+    </script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        html,body{
+            padding:0;margin:0;
+        }
+        #imgbox{
+            width:400px;
+            height:400px;
+            border:1px solid #999;
+            position:relative;
+            margin:50px 0 0 50px;
+            background:#f00;
+        }
+        #smallbox{
+            width:400px;
+            height:400px;
+        }
+        #mark{
+            width:200px;
+            height:200px;
+            position:absolute;
+            left:0;
+            top: 0;
+            background:rgba(0, 0, 0, 0.2);
+            display:none;
+        }
+        #bigbox{
+            width:600px;
+            height:600px;
+            border:1px solid #ccc;
+            position:absolute;
+            top:0;
+            left:402px;
+            display:none;
+            overflow:hidden;
+        }
+        #bigimg{
+            position:absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="imgbox">
+        <div id="smallbox">
+            <div id="mark"></div>
+            <img src="img/smallimg.jpg" width="400" height="400" />
+        </div>
+        <div id="bigbox">
+            <img src="img/bigimg.jpg" id="bigimg" />
+        </div>
+    </div>
+
+    <script>
+        function $(obj){
+            return document.getElementById(obj);
+        }
+        $('smallbox').onmouseover = function(){
+            $('mark').style.display = "block";
+            $('bigbox').style.display = "block";
+        }
+        $('smallbox').onmouseout = function(){
+            $('mark').style.display = "none";
+            $('bigbox').style.display = "none";
+        }
+        $('smallbox').onmousemove = function(event){
+            //获取鼠标相对于小图片的位置。
+            var left = event.clientX - $('imgbox').offsetLeft - $('smallbox').offsetLeft - $("mark").offsetWidth/2;
+            var top = event.clientY - $('imgbox').offsetTop - $('smallbox').offsetTop - $("mark").offsetHeight/2;
+            //设置浮动层的移动范围
+            if(left<0){
+                left = 0;
+            }else if(left > ($("smallbox").offsetWidth - $("mark").offsetWidth)){
+                left = $("smallbox").offsetWidth - $("mark").offsetWidth;
+            }
+
+            if(top<0){
+                top = 0;
+            }else if(top > ($("smallbox").offsetHeight - $("mark").offsetHeight)){
+                top = $("smallbox").offsetHeight - $("mark").offsetHeight;
+            }
+            $("mark").style.left = left + "px";
+            $("mark").style.top = top + "px";
+
+            // $('bigimg').style.left = - left * ($('bigimg').offsetWidth - $("bigbox").offsetWidth) / ($("smallbox").offsetWidth - $("mark").offsetWidth) + "px";
+            // $('bigimg').style.top = - top * ($('bigimg').offsetHeight - $("bigbox").offsetHeight) / ($("smallbox").offsetHeight - $("mark").offsetHeight) + "px";
+            //
+            $('bigimg').style.left = (left/ $("mark").offsetWidth)*$("bigbox").offsetWidth + "px";
+            $('bigimg').style.top = ((top + $("smallbox").offsetHeight) / $("mark").offsetHeight)*$("bigbox").offsetHeight + "px"
+        }
+    </script>
+</body>
+</html>

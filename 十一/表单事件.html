@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    用户名：<input type="text" id="name" /><span id="span"></span>
+    </div>
+
+
+
+    <select name="select" id="sec">
+        <option value="111">1111</option>
+        <option value="222">2222</option>
+        <option value="333">3333</option>
+    </select>
+    <script>
+        document.getElementById("name").onfocus = function(){
+            document.getElementById("span").innerHTML = "请使用字母、数字及下划线组合，长度为8-15字符"
+        }
+        document.getElementById("name").onchange = function(){
+            console.log("...")
+            if(document.getElementById("name").value !== "13888888888"){
+                document.getElementById("span").innerHTML = "对不起，您的输入有误，请重新输入"
+            }else{
+                document.getElementById("span").innerHTML = "用户名可用"
+            }
+        }
+        document.getElementById("sec").onchange = function(){
+            console.log("...")
+        }
+    </script>
+</body>
+</html>

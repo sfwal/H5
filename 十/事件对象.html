@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        #box{
+            width:80px;
+            height: 80px;
+            background:#f00;
+            position:absolute;
+            left:100px;
+            top:100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        var box = document.getElementById("box");
+        box.onmousedown = function(down_event){
+            var downX = down_event.clientX;
+            var downY = down_event.clientY;
+            //console.log(downX,downY)
+            //获取按下的点相对于div的偏移量
+            var pianX = downX - box.offsetLeft;
+            var pianY = downY - box.offsetTop;
+            document.onmousemove = function(move_event){
+                var moveX = move_event.clientX;
+                var moveY = move_event.clientY;
+                box.style.left = moveX - pianX + "px";
+                box.style.top = moveY - pianY + "px";
+                //console.log(moveX,moveY);
+            }
+        }
+        box.onmouseup = function(){
+            document.onmousemove = null;
+        }
+    </script>
+</body>
+</html>

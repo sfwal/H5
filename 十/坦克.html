@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        body{
+            background:#000;
+        }
+        #tanke{
+            position:absolute;
+            left:100px;
+            bottom:100px;
+        }
+    </style>
+</head>
+<body>
+    <img id="tanke" src="img/p1tankU.gif" />
+    <script>
+        var tk = document.getElementById("tanke");
+        document.onkeydown = function(event){
+            switch(event.keyCode){
+                case 37:
+                tk.src = "img/p1tankL.gif";
+                tk.style.left = tk.offsetLeft - 10 +"px";
+                break;
+                case 38:
+                tk.src = "img/p1tankU.gif";
+                tk.style.top = tk.offsetTop - 10 +"px";
+                break;
+                case 39:
+                tk.src = "img/p1tankR.gif";
+                tk.style.left = tk.offsetLeft + 10 +"px";
+                break;
+                case 40:
+                tk.src = "img/p1tankD.gif";
+                tk.style.top = tk.offsetTop + 10 +"px";
+                break;
+            }
+        }
+    </script>
+</body>
+</html>

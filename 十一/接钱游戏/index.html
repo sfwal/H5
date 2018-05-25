@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        *{
+            margin:0; padding:0;
+        }
+        #pen{
+            position:absolute;
+            width:103px;
+            height:48px;
+            background:url('images/pen.png');
+            left:300px;
+            bottom:50px;
+        }
+        .gold{
+            position:absolute;
+            width:60px;
+            height:60px;
+            top:70px;
+        }
+    </style>
+</head>
+<body>
+    <div id="pen"></div>
+    <script>
+        var penImg = document.getElementById("pen");
+        penImg.onmousedown = function(event){
+            var left = event.clientX - penImg.offsetLeft;
+            var top = event.clientY - penImg.offsetTop;
+            document.onmousemove = function(e){
+                penImg.style.left = e.clientX - left + "px";
+                penImg.style.top = e.clientY - top + "px";
+            }
+        }
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        }
+        console.log(document.body.clientWidth)
+        console.log(document.body.offsetWidth)
+        console.log(document.documentElement.clientWidth)
+        //封装产生金币的方法
+        function gold(){
+            var goldImg = document.createElement("img");
+            goldImg.className = "gold";
+            goldImg.src = "images/jin.png";
+            goldImg.style.left = Math.floor(Math.random()*(document.body.offsetWidth - goldImg.offsetWidth)) + "px";
+            document.body.appendChild(goldImg);
+            console.log(goldImg.offsetWidth);
+            goldDown(goldImg);
+        }
+        //金币下落动画
+        function goldDown(obj){
+            setInterval(function(){
+                obj.style.top = obj.offsetTop + 1 + "px";
+                //这是判断是否超出屏幕范围
+                if(obj.offsetTop > document.documentElement.clientHeight - obj.offsetHeight){
+                    document.body.removeChild(obj);
+                }
+                //判断是否被盆子接住
+                if(obj.offsetLeft + obj.offsetWidth >= penImg.offsetLeft && obj.offsetLeft - obj.offsetWidth <= penImg.offsetLeft && obj.offsetTop + obj.offsetHeight >= penImg.offsetTop && obj.offsetTop - obj.offsetHeight <= penImg.offsetTop){
+                    document.body.removeChild(obj);
+                }
+            },5)
+        }
+        setInterval(gold,500);
+
+
+    </script>
+</body>
+</html>

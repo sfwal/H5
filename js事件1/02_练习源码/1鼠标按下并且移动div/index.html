@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#myDiv{
+				width: 50px;
+				height: 50px;
+				background-color: red;
+				position: absolute;
+				left: 100px;
+				top: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="myDiv"></div>
+		
+		<script>
+			// 获取标签
+			var theDiv = document.getElementById("myDiv");
+			// 给div绑定鼠标按下事件
+			theDiv.onmousedown = function(down_ev){
+				var down_evObj = down_ev || window.event;
+				// 获取按下的点的坐标
+				var downX = down_evObj.clientX;
+				var downY = down_evObj.clientY;
+				// 获取按下的点相对于div原点的偏移量
+				var pianX = downX - theDiv.offsetLeft;
+				var pianY = downY - theDiv.offsetTop;
+				// 给文档绑定鼠标移动事件
+				document.onmousemove = function(move_ev){
+					var move_evObj = move_ev || window.event;
+					// 设置div标签新的left和top值
+					theDiv.style.left = move_evObj.clientX - pianX + "px";
+					theDiv.style.top = move_evObj.clientY - pianY + "px";
+				}
+				
+			}
+			// 给div绑定鼠标抬起事件
+			theDiv.onmouseup = function(){
+				// 移除文档上的鼠标移动事件
+				document.onmousemove = null;
+			}
+			
+		</script>
+	</body>
+</html>

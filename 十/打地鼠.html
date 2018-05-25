@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        .box{
+            width:320px;
+            height:480px;
+            margin:0 auto;
+            background:url(img/game_bg.jpg) 0 0 no-repeat;
+            position:relative;
+        }
+        #count{
+            position:absolute;
+            left:60px;
+            top:9px;
+            font-size: 20px;
+            color:#fff;
+        }
+        #time{
+            width: 180px;
+            height:16px;
+            background:url('img/progress.png') 0 0 no-repeat;
+            position:absolute;
+            left:63px;
+            top:66px;
+        }
+        #start{
+            width: 100px;
+            height: 30px;
+            background:#ff4b00;
+            line-height:30px;
+            text-align:center;
+            font-size:18px;
+            color:#fff;
+            position:absolute;
+            left:50%;
+            top:50%;
+            margin:-15px 0 0 -50px;
+            cursor:pointer;
+            z-index:999;
+        }
+        #pit>div{
+            width: 73px;
+            height: 65px;
+            position:absolute;
+            background-size:100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div id="count">0</div>
+        <div id="time"></div>
+        <div id="start">开始</div>
+        <div id="pit">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <script>
+        function $(obj){
+            return document.getElementById(obj);
+        }
+        function randomNum(min,max){
+            return Math.floor(Math.random()*(max-min+1)+min);
+        }
+        //设置游戏时间
+        var gameTime = 60;
+        //记录分数
+        var count = 0;
+        //定义狼坑的数组
+        var pitArr = $("pit").getElementsByTagName("div");
+
+        //时间进度条
+        function progressBar(){
+            var speed = $("time").offsetWidth / (gameTime * 5);
+            var timer = setInterval(function(){
+                if($("time").offsetWidth - speed < 0){
+                    $("time").style.width = 0;
+                    clearInterval(timer);
+                    alert("GG");
+                    window.location.reload();
+                }
+                $("time").style.width = $("time").offsetWidth - speed + "px";
+            },200)
+        }
+        //准备图片数组
+        var bigWolf = [];
+        var smallWolf = [];
+        for(var i=0;i<10;i++){
+            bigWolf.push("img/h"+i+".png");
+            smallWolf.push("img/x"+i+".png");
+        }
+        //游戏开始
+        $("start").onclick = function(){
+            //开始按钮消失
+            this.style.display = "none";
+            //调用进度条方法
+            progressBar();
+            setInterval(function(){
+                randKeng();
+            },500)
+        }
+        //设置坑的位置
+        var pitP = [
+            ['112px','145px'],
+            ['35px','257px'],
+            ['202px','171px'],
+            ['32px','190px'],
+            ['118px','221px'],
+            ['215px','241px'],
+            ['133px','303px'],
+            ['44px','323px'],
+            ['223px','325px']
+        ]
+        for(var i=0;i<pitP.length;i++){
+            pitArr[i].style.left = pitP[i][0];
+            pitArr[i].style.top = pitP[i][1];
+            pitArr[i].life = true; //设置每个坑里面的狼都是活的。
+        }
+        //出狼的动画
+        //需要两个参数：一个是在哪个坑去执行出狼动画，另一个是出什么狼
+        function wolfAnimate(keng,wolfArr){
+            var index = 0;  //出第几张图片，狼的图片数组的下标
+            var speed = 1;  //设置狼动画的速度
+            keng.timer = setInterval(function(){
+                keng.style.backgroundImage = "url("+wolfArr[index]+")";
+                if(index == 5){
+                    speed = -speed;
+                }
+                index = index + speed;
+                if(index<0){
+                    keng.style.backgroundImage = "";
+                    clearInterval(keng.timer);
+                }
+            },400)
+        }
+        //随机狼坑来执行出狼动画
+        function randKeng(){
+            var randIndex = randomNum(0,(pitArr.length-1));
+            var randWolf = randomNum(0,1);
+            if(pitArr[randIndex].style.backgroundImage == ""){
+                if(randWolf == 0){
+                    wolfAnimate(pitArr[randIndex],bigWolf);
+                    pitArr[randIndex].type = 0;
+                }else{
+                    wolfAnimate(pitArr[randIndex],smallWolf);
+                    pitArr[randIndex].type = 1;
+                }
+            }
+
+        }
+        //给每个坑绑定一个点击事件
+        for(var i=0;i<pitArr.length;i++){
+            pitArr[i].onclick = function(){
+                if(this.style.backgroundImage != ""){
+                    if(this.type == 0){
+                        beatWolf(this,bigWolf)
+                    }else{
+                        beatWolf(this,smallWolf)
+                    }
+
+                }
+            }
+        }
+        //打狼的动画
+        function beatWolf(keng,wolfArr){
+            var index = 6;
+            clearInterval(keng.timer);
+            if(keng.life != true){
+                return false;
+            }
+            keng.life = false;
+            if(keng.type == 0){
+                count += 10;
+            }else{
+                count -= 10;
+            }
+            $("count").innerHTML = count;
+            keng.t = setInterval(function(){
+                keng.style.backgroundImage = "url("+wolfArr[index]+")";
+                index++;
+                if(index == wolfArr.length){
+                    keng.style.backgroundImage = "";
+                    clearInterval(keng.t);
+                    keng.life = true;
+                }
+            },200)
+
+        }
+    </script>
+</body>
+</html>

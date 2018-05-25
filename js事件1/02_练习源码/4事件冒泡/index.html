@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			li{
+				background-color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<button onclick="add()">添加</button>
+		<ul id="myUL">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</body>
+	<script>
+		var index = 4; // li的文本应该从4开始了
+		var myUL = document.getElementById("myUL"); // 获取标签
+		// 给ul绑定鼠标移入事件
+		myUL.addEventListener("mouseover", function(ev){
+			var evObj = ev || window.event;
+			// 拿到真正触发事件的那个target, 也就是那个li
+			var myTarget = evObj.srcElement || evObj.target; // 火狐浏览器不支持srcElement, 所以得用事件对象.target
+			if (myTarget.nodeName == "LI"){
+				// 当前触发事件的标签是LI时, 再改变颜色
+				myTarget.style.backgroundColor = "red";
+			}
+			
+		});
+		
+		// 给ul绑定鼠标移出事件
+		myUL.addEventListener("mouseout", function(ev){
+			var evObj = ev || window.event;
+			// 获取真正触发事件的目标
+			var myTarget = evObj.srcElement || evObj.target;
+			// 判断触发事件的目标是否为LI
+			if (myTarget.nodeName == "LI"){
+				// 改变背景色为白色
+			myTarget.style.backgroundColor = "white";
+			}
+		});
+		
+		// 新增一个li按钮的点击方法
+		function add(){
+			// 新建li
+			var tLi = document.createElement("li");
+			// 设置文本内容
+			tLi.innerHTML = index++;
+			// 添加到UL上
+			myUL.appendChild(tLi);
+		}
+		
+		
+		
+		
+		
+	</script>
+</html>
