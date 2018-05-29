@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>demo</title>
+<style>
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,cite,dfn,em,var{font-style:normal;}
+code,kbd,pre,samp{font-family:courier new,courier,monospace;}
+ul,ol{list-style:none;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+legend{color:#000;}
+fieldset,img{border:0;}
+button,input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0;}
+.clear{clear: both;float: none;height: 0;overflow: hidden;}
+#demo{display:block;width:400px;height:255px;margin:50px;position:relative;border:1px solid#ccc}
+#small-box{position:relative;z-index:1}
+#float-box{display:none;width:160px;height:120px;position:absolute;background:#ffffcc;border:1px solid#ccc;filter:alpha(opacity=50);opacity:0.5}
+#mark{position:absolute;display:block;width:400px;height:255px;background-color:#fff;filter:alpha(opacity=0);opacity:0;z-index:10}
+#big-box{display:none;position:absolute;top:0;left:460px;width:400px;height:300px;overflow:hidden;border:1px solid#ccc;z-index:1}
+#big-box img{position:absolute;z-index:5}
+</style>
+</head>
+<body>
+<div id="demo">
+  <div id="small-box">
+    <div id="mark"></div>
+    <div id="float-box"></div>
+    <img src="img/smallimg.jpg"/>
+  </div>
+  <div id="big-box">
+    <img src="img/bigimg.jpg"/>
+  </div>
+</div>
+<script type="text/javascript">
+// 大图上的放大镜：小图的显示区域=大图片大小：小图片大小=大图片的offsetLeft：小图片的offsetLeft
+  //在页面加载完后立即执行多个函数方案
+  function addloadEvent(func){
+    var oldonload=window.onload;
+    if(typeof window.onload !="function"){
+      window.onload=func;
+    }
+    else{
+      window.onload=function(){
+        if(oldonload){
+          oldonload(); 
+        }
+        func();
+      }
+    }
+  }
+  //在页面加载完后立即执行多个函数方案结束
+  addloadEvent(b);
+  function b(){
+   //获取外围容器
+   var demo=document.getElementById("demo");
+   //获取小图片容器
+   var s_Box=document.getElementById("small-box");
+   //获取大图片容器
+   var b_Box=document.getElementById("big-box");
+   //获取大图片
+   var b_Image=b_Box.getElementsByTagName("img")[0];
+   //获取放大镜
+   var f_Box=document.getElementById("float-box");
+   //覆盖在最上面的盖板为鼠标移动用
+   var mark=document.getElementById("mark");
+   //移入放大镜和大图片容器显示
+   mark.onmouseover=function(){
+   f_Box.style.display="block";
+   b_Box.style.display="block";
+   }
+   //移出放大镜和大图片容器隐藏
+   mark.onmouseout=function(){
+   f_Box.style.display="none";
+   b_Box.style.display="none";
+   }
+   //移动事件
+   mark.onmousemove=function(ev){
+   //获取鼠标坐标window兼容ie
+   var e=ev||window.event;
+   //当前鼠标x轴-容器相对body偏移量-小容器相对父容器偏移值-放大镜宽度的一半=放大镜的当前位置
+   var left=e.clientX-demo.offsetLeft-s_Box.offsetLeft-f_Box.offsetWidth/2;
+   //公式同上
+   var top=e.clientY-demo.offsetTop-s_Box.offsetTop-f_Box.offsetHeight/2;
+   //判断当放大镜移出容器时在边缘显示
+   if(left<0){
+    left=0;
+   }else if(left>(s_Box.offsetWidth-f_Box.offsetWidth)){
+    left=s_Box.offsetWidth-f_Box.offsetWidth;
+   }
+   if(top<0){
+    top=0;
+   }else if(top>(s_Box.offsetHeight-f_Box.offsetHeight)){
+    top=s_Box.offsetHeight-f_Box.offsetHeight;
+   }
+   //放大镜当前位置
+   f_Box.style.left=left+"px";
+   f_Box.style.top=top+"px";
+   //获取比例
+   var z=b_Image.offsetWidth/s_Box.offsetWidth;
+   //用放大镜偏移量*比例=大图片的偏移量，方向相反所以负值
+   b_Image.style.left=-left*z+"px";
+   b_Image.style.top=-top*z+"px";
+   }
+  }
+</script>
+</body>
+</html>

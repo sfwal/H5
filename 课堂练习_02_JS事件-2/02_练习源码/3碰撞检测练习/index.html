@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			html, body{
+				height: 100%;
+				overflow: hidden;
+			}
+			.jin{
+				position: absolute;
+				top: -50px;
+				width: 70px;
+				height: 70px;
+			}
+			#pen{
+				width: 103px;
+				height: 48px;
+				background-image: url(img/pen.png);
+				background-size: 100% 100%;
+				position: absolute;
+				bottom: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="pen"></div>
+		<script>
+			// 获取标签
+			var penImg = document.getElementById("pen");
+			
+			// 实现盆的div鼠标按下事件
+			penImg.onmousedown = function(down_ev){
+				var down_evObj = down_ev || window.event;
+				// 获取点击的点位于盆div原点的偏移量
+				var pianX = down_ev.clientX - penImg.offsetLeft;
+				// 给document绑定鼠标移动事件
+				document.onmousemove = function(move_ev){
+					var move_evObj = move_ev || window.event;
+					// 设置盆div的位置
+					penImg.style.left = move_evObj.clientX - pianX + "px";
+				}
+			}
+			// 盆document鼠标抬起事件
+			document.onmouseup = function(){
+				// 移除document鼠标移动事件
+				document.onmousemove = null;
+			}
+			
+			
+			// 封装产生金币的方法
+			function createJin(){
+				var jinImg = document.createElement("img");
+				jinImg.className = "jin";
+				jinImg.src = "img/jin.png";
+				document.body.appendChild(jinImg);
+				// 在横向上随机取一个位置
+				jinImg.style.left = Math.floor(Math.random() * (document.body.clientWidth - jinImg.offsetWidth)) + "px";
+				jinDownAnimate(jinImg);
+			}
+			
+			// 每隔0.1秒调用一次
+			setInterval(function(){
+				createJin();	
+			}, 500);
+			
+			// 封装金币掉落动画方法
+			function jinDownAnimate(obj){
+				setInterval(function(){
+					obj.style.top = obj.offsetTop + 1 + "px";
+					// 超出边界删除
+					if (obj.offsetTop > document.body.clientHeight - obj.offsetHeight){
+						document.body.removeChild(obj);
+					}
+					
+					// 判断是否相撞
+					if (rectPeng(penImg, obj)){
+						document.body.removeChild(obj);
+					}
+				}, 5);
+			}
+			
+			// 封装检测碰撞方法
+			function rectPeng(myObj, otherObj) {
+	if(myObj.offsetLeft + myObj.offsetWidth >= otherObj.offsetLeft && myObj.offsetLeft <= otherObj.offsetLeft + otherObj.offsetWidth && myObj.offsetTop + myObj.offsetHeight >= otherObj.offsetTop && myObj.offsetTop <= otherObj.offsetTop + otherObj.offsetHeight) {
+		return true;
+	} else {
+		return false;
+	}
+}
+			
+		</script>
+	</body>
+</html>

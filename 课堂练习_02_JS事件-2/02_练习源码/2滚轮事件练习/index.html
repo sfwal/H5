@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#upImg {
+				width: 30px;
+				height: 30px;
+				position: fixed;
+				right: 30px;
+				bottom: 30px;
+				display: none;
+			}
+			
+			html,
+			body {
+				/*模拟竖着滚动范围*/
+				height: 300%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<span>我是顶部文字</span>
+		<img id="upImg" src="img/up.png" alt="" />
+
+		<script>
+			var upImg = document.getElementById("upImg");
+		
+			// 滚轮事件(判断滚动方向)兼容性封装
+			// 参数1: 回调函数
+			// 参数2: 在捕获还是冒泡阶段执行事件
+			function addScroll(fn, bol) {
+				// 先判断当前浏览器
+				var tIndex = window.navigator.userAgent.indexOf("Firefox");
+				if(tIndex > -1) { // 说明是火狐
+					// 给火狐浏览器绑定滚轮事件
+					document.addEventListener("DOMMouseScroll", function(ev) {
+						// 利用回调函数, 返回滚动条距离浏览器顶部的距离
+						fn(document.documentElement.scrollTop);
+					}, bol);
+				} else { // 说明是非火狐
+					document.addEventListener("mousewheel", function(ev) {
+						// 利用回调函数, 返回滚动条距离浏览器顶部的距离
+						fn(document.body.scrollTop);
+					}, bol);
+				}
+			}
+
+			// 使用封装的滚轮事件方法
+			addScroll(function(num) {
+				if (num > 200){
+					upImg.style.display = "block";
+				} else {
+					upImg.style.display = "none";
+				}
+				
+			}, false);
+			
+			upImg.onclick = function(){
+				// 火狐浏览器回到顶部
+				document.documentElement.scrollTop = 0;
+				// 非火狐浏览器回到顶部
+				document.body.scrollTop = 0;
+			}
+		</script>
+	</body>
+
+</html>
