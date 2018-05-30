@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<span>用户名: </span><input type="text" id="name"/>
+		<br />
+		<span>密码: </span><input type="password" id="pass"/>
+		<br />
+		<button onclick="login()">登录</button>
+		<script>
+			// 获取标签
+			var nameInput = document.getElementById("name");
+			var passInput = document.getElementById("pass");
+		
+			// 登录按钮点击事件
+			function login(){
+				// 从localStroage中取出这个用户的密码, 和网页上输入的密码进行判断
+				if (localStorage[nameInput.value] == passInput.value){
+					// 保存登录成功, 用户名到cookie中
+					document.cookie = "isLogin=" + nameInput.value; 
+					window.location.href = "welcome.html";	
+				}
+				
+			}
+		</script>
+	</body>
+</html>

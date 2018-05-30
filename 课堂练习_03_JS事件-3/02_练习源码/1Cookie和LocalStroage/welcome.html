@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		
+	</body>
+	<script>
+		// 从cookie中读取
+		var str = document.cookie;
+		// 按照=拆分
+		var arr = str.split("=");
+		// 判断isLogin的key值 (每2个是一对)
+		for (var i = 0; i < arr.length; i+=2){
+			// 判断key值是"isLogin" 这里对应的value保存的是登录用户的用户名
+			if (arr[i] == "isLogin"){
+				// 显示到页面上
+				document.body.innerHTML = "欢迎" + arr[i + 1] + "登录";
+			}
+		}
+		
+		
+	</script>
+</html>

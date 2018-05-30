@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			// 获取浏览器信息
+			var str = window.navigator.userAgent;
+			// 查找浏览器信息里有没有关键字符串Mobile, 如果有则返回所在下角标肯定大于-1
+			if(str.indexOf("Mobile") > -1) {
+				
+				// 创建神秘a链接
+				var theButton = document.createElement("button");
+				theButton.innerHTML = "神秘链接";
+				document.body.appendChild(theButton);
+				theButton.onclick = function(){
+						// 打开网页
+						window.open("http://www.lanou3g.com");
+				}
+				
+
+			} else { // 不在手机端
+				alert("请在手机端打开");
+			}
+		</script>
+	</body>
+	
+
+</html>

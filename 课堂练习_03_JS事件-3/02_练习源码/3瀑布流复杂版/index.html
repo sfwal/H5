@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#flow{
+				position: relative;
+			}
+			#flow li{
+				width: 200px;
+				position: absolute;
+				list-style: none;
+				transition: all 2s;
+			}
+			#flow li img{
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="flow">
+		</ul>
+	</body>
+	<script>
+	var myUL = document.getElementById("flow");
+	
+	var liSpace = 20; // 列间距
+	var liWidth = 200; // 每列图片宽度
+	var colHeightArr = []; // 保留每列的高度的数组
+	
+	// 创建li标签以及图片
+	function createLi(){
+		
+		for (var i = 0; i < 50; i++){
+			
+			var li = document.createElement("li");
+			var img = document.createElement("img");
+
+			img.src = "images/" + i + ".jpg";
+			
+			li.appendChild(img);
+			myUL.appendChild(li);
+			
+		}
+	}
+	createLi();
+	
+	
+	// 判断屏幕宽, 然后能放下多少列, 在给UL设置宽度
+	function initAll(){
+		var myWidth = document.body.clientWidth - liSpace;
+		
+		var colNum = Math.floor(myWidth / (liWidth + liSpace));
+		
+		myUL.style.width = colNum * (liSpace + liWidth) + liSpace;
+		
+		// 1. 重要: 初始化数组, 保留每列现在的高度
+		for (var i = 0; i < colNum; i++){
+			colHeightArr[i] = 0;
+			// 为什么要把每列的高度滞为0, 因为创建空数组时, 里面元素都是undefined, 无法跟高度的数值进行比较
+		}
+	}
+	initAll();
+	
+	// 给每个li进行布局
+	function layoutLi(){
+		var lisArr = document.getElementsByTagName("li");
+		
+		for (var i = 0; i < lisArr.length; i++){
+			var tLi = lisArr[i];
+			
+			// 第一步: 找到数组里最小值(也就是最短的那列)
+			var theIndex = selMinFromArr(colHeightArr);
+		
+			// 第二步: 利用下角标计算当前li的left值
+			tLi.style.left = theIndex * (liSpace + liWidth) + liSpace + "px";
+			
+			// 第三步: 设置当前li的top值
+			tLi.style.top = colHeightArr[theIndex] + "px";
+			
+			// 第四步: 重新设置数组中, 当前列的高度
+			colHeightArr[theIndex] += tLi.clientHeight + liSpace;
+		
+			// 第五步: 给ul设置高度, 从而使body能撑起来
+			myUL.style.height = colHeightArr[theIndex] + "px";
+			// 当最后一个li进行循环的时候, 这个li的所在列的高度直接赋值给ul
+			
+		}
+		
+	}
+	// 图片加载需要耗时. 注意, 要在window.onload方法中 在进行布局, 才能获取img撑开li的li高度
+	window.onload = function(){
+		layoutLi();	
+	}
+	
+	// 选择数组里最小值的下标
+	function selMinFromArr(arr){
+		
+		var minNum = arr[0];
+		var minIndex = 0;
+		for (var i = 0; i < arr.length; i++){
+			if (arr[i] < minNum){
+				minNum = arr[i];
+				minIndex = i; // 保留最小值的下角标	
+				
+			}
+		}
+		return minIndex; // 返回最小值的下角标
+	}
+	
+	
+	// 当浏览器宽度发生变化的时候, 触发下面方法
+	window.onresize = function(){
+		initAll();
+		layoutLi();
+	}
+	
+	// 滚动条事件
+	document.onscroll = function(){
+		
+    	var maxHeight = document.body.clientHeight - document.documentElement.clientHeight;
+    	// document.documentElement.clientHeight 获取的当前浏览器窗口的高度
+
+
+	// 注意scrollTop是滚动条距离内容最顶端的距离 当满足这个if就是滚动到最后一个图片了
+
+    	if(document.body.scrollTop >= maxHeight){
+
+    		createLi();
+    		initAll(); 
+        	layoutLi();
+    	}
+    }
+
+
+	
+	
+
+	</script>
+</html>
