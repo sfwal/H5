@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	
+</body>
+<script src="mock.js"></script>
+<script type="text/javascript">
+var data = Mock.mock({
+	'person|5':[
+		{
+			'name':'@cname',
+			'sex':'@pick(["男", "女"])'
+		}
+	]
+})
+console.log(JSON.stringify(data, null, 4));
+</script>
+</html>

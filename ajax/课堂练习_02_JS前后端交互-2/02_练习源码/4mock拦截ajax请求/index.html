@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+</body>
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<script src="mock.js"></script>
+<script>
+//mock数据模拟
+Mock.mock('http://api.mockdata.cn', {
+	'list|5':[
+		{
+			'name': '@cname',
+		    'age|20-35': 100,
+		    "sex": '@pick(["男", "女"])'
+		}
+	]
+});
+//ajax请求
+$.ajax({
+    url: 'http://api.mockdata.cn',
+    dataType: 'json'
+}).done(function(data, status, xhr) {
+    console.log(
+        JSON.stringify(data, null, 4)
+    );
+    var str = "";
+    for(var i of data.list){
+    	// console.log(i);
+    	str += "<tr><td>" +i.name+ "</td>" + "<td>" +i.age+ "</td>" + "<td>" +i.sex+ "</td></tr>";
+    }
+
+    $("body").html("<table border=1>"+str+"</table>");
+});
+</script>
+
+</html>
