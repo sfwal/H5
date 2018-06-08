@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+    <title>shop</title>
+    <style type="text/css">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        background-color: #F4F4F4;
+    }
+
+    ul {
+        list-style: none;
+        overflow: hidden;
+        margin: 0.266667rem 0.266667rem 0 0.266667rem;
+    }
+
+    li {
+        float: left;
+        background-color: #fff;
+        width: 4.666667rem;
+        margin-bottom: 0.266667rem;
+    }
+
+    li:nth-of-type(odd) {
+        margin-right: 0.106667rem;
+    }
+
+    h2 {
+        font-size: 0.4rem;
+    }
+
+    strong {
+        font-size: 0.373333rem;
+        text-align: left;
+        color: #de0000;
+        margin-right: 0.373333rem;
+    }
+
+    span {
+        font-size: 0.32rem;
+        color: #666;
+    }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <!-- <li>
+            <div>
+                <img src="images/product1.png">
+            </div>
+            <div>
+                <h2>休闲零食五味园pkc脆独立小包装500g</h2>
+                <strong>￥10.9</strong><span>原价：<del>￥12.8</del></span>
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="images/product1.png">
+            </div>
+            <div>
+                <h2>休闲零食五味园pkc脆独立小包装500g</h2>
+                <strong>￥10.9</strong><span>原价：<del>￥12.8</del></span>
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="images/product1.png">
+            </div>
+            <div>
+                <h2>休闲零食五味园pkc脆独立小包装500g</h2>
+                <strong>￥10.9</strong><span>原价：<del>￥12.8</del></span>
+            </div>
+        </li>
+        <li>
+            <div>
+                <img src="images/product1.png">
+            </div>
+            <div>
+                <h2>休闲零食五味园pkc脆独立小包装500g</h2>
+                <strong>￥10.9</strong><span>原价：<del>￥12.8</del></span>
+            </div>
+        </li> -->
+    </ul>
+</body>
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<script src="mock.js"></script>
+<script type="text/javascript">
+Mock.mock('http://api.shop.cn', 'get', {
+    'list|4': [{
+        'img': 'images/product@integer(1,4).png',
+        'title': '休闲零食五味园pkc脆独立小包装500g',
+        'price|1-100.1': 10.9,
+        'incentive': function(){
+        	return this.price + 5;
+        }
+    }]
+});
+
+$.ajax({
+    url: 'http://api.shop.cn',
+    dataType: 'json'
+}).done(function(data, status, xhr) {
+    console.log(
+        JSON.stringify(data, null, 4)
+    )
+    $("ul").html("");
+    var str = "";
+    for (var i = 0; i < data.list.length; i++) {
+        str += "<li>\
+				            <div>\
+				                <img src='" + data.list[i].img + "'>\
+				            </div>\
+				            <div>\
+				                <h2>" + data.list[i].title + "</h2>\
+				                <strong>￥" + data.list[i].price + "</strong><span>原价：<del>￥" + data.list[i].incentive + "</del></span>\
+				            </div>\
+				        </li>";
+    }
+    $("ul").html(str);
+});
+</script>
+
+</html>
