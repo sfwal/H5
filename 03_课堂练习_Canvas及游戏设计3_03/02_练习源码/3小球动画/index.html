@@ -1,0 +1,101 @@
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<canvas id="MymyCanvasvasArea" width="600" height="500" style="border:2px solid blue;">你的浏览器不支持myCanvasvas</canvas>
+		<script type="text/javascript">
+			window.onload = function() {
+				init();
+			}
+
+			//定义变量
+			var myCanvas; //canvas
+			var ctx; //画笔
+			var particles = []; //小球集合
+			var numParticles = 100; //小球数量
+			var gravity = 0.4; //重力
+
+			//动画
+			function animate() {
+				reqAnimFrame = window.mozRequestAnimationFrame ||
+					window.webkitRequestAnimationFrame ||
+					window.msRequestAnimationFrame ||
+					window.oRequestAnimationFrame;
+				clear();
+				drawBarrel();
+				draw();
+				update();
+				reqAnimFrame(animate);
+			}
+
+			//初始化
+			function init() {
+				var r, g, b;
+				myCanvas = document.getElementById('MymyCanvasvasArea');
+				ctx = myCanvas.getContext('2d');
+				for(var i = 0; i < numParticles; i++) {
+					r = parseInt(Math.random() * 255);
+					g = parseInt(Math.random() * 255);
+					b = parseInt(Math.random() * 255);
+					var particle = {
+						x: myCanvas.width / 2,
+						y: myCanvas.height - 100,
+						vx: Math.random() * 4 - 2,
+						vy: Math.random() * -14 - 7,
+						pcolor: 'rgb(' + r + ',' + g + ',' + b + ')'
+					};
+					particles.push(particle);
+				}
+				animate();
+			}
+
+			//更新小球的位置
+			function update() {
+				for(var i = 0; i < numParticles; i++) {
+					var part = particles[i];
+					part.x = part.x + part.vx; //adding the speed
+					part.y = part.y + part.vy; //adding the speed
+
+					part.vy += gravity;
+
+					if(part.x > myCanvas.width || part.x < 0 || part.y > myCanvas.height || part.y < 0) {
+						part.x = myCanvas.width / 2;
+						part.y = myCanvas.height - 100;
+						part.vx = Math.random() * 4 - 2;
+						part.vy = Math.random() * -14 - 7;
+					}
+				}
+			}
+
+			//清除画板
+			function clear() {
+				ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+			}
+
+			//绘制喷桶
+			function drawBarrel() {
+				ctx.beginPath();
+				ctx.fillStyle = "rust";
+				ctx.fillRect(myCanvas.width / 2 - 15, myCanvas.height - 90, 30, 100);
+				ctx.closePath();
+			}
+
+			//绘制小球
+			function draw() {
+				var r, g, b;
+				for(var i = 0; i < numParticles; i++) {
+					var part = particles[i];
+					ctx.beginPath();
+					ctx.fillStyle = part.pcolor;
+					ctx.arc(part.x, part.y, 5, 0, Math.PI * 2, false);
+					ctx.fill();
+				}
+			}
+		</script>
+	</body>
+
+</html>

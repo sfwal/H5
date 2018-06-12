@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#my-canvas {
+				display: block;
+				margin: 0 auto;
+				border: 5px solid gold;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="my-canvas" width="600" height="600">
+			您的浏览器不支持canvas
+		</canvas>
+		<script type="text/javascript">
+			//随机函数
+			function random(x, y) {
+				return Math.floor(Math.random() * (y - x + 1) + x);
+				//return parseInt(Math.random() * (y - x + 1) + x);
+			}
+
+			//获取canvas
+			var myCanvas = document.getElementById("my-canvas");
+			var ctx = myCanvas.getContext("2d");
+
+			//小球类
+			function Ball() {
+				//随机半径
+				this.r = random(10, 20);
+				//随机颜色
+				this.color = "rgb(" + random(0, 255) + "," + random(0, 255) + "," + random(0, 255) + ")";
+				//随机圆心位置
+				this.x = random(this.r, myCanvas.width - this.r);
+				this.y = random(this.r, myCanvas.height - this.r);
+				//随机速度
+				this.speedX = random(2, 5) * (random(0, 1) ? 1 : -1);
+				this.speedY = random(2, 5) * (random(0, 1) ? 1 : -1);
+			}
+			//小球移动
+			Ball.prototype.move = function() {
+				this.x += this.speedX;
+				this.y += this.speedY;
+				//判断是否碰到左边界
+				if(this.x <= this.r) {
+					this.x = this.r;
+					this.speedX *= -1;
+				}
+				//右边界
+				if(this.x >= myCanvas.width - this.r) {
+					this.x = myCanvas.width - this.r;
+					this.speedX *= -1;
+				}
+				//上边界
+				if(this.y <= this.r) {
+					this.y = this.r;
+					this.speedY *= -1;
+				}
+				//下边界
+				if(this.y >= myCanvas.height - this.r) {
+					this.y = myCanvas.height - this.r;
+					this.speedY *= -1;
+				}
+			}
+			//画小球
+			Ball.prototype.draw = function() {
+				ctx.beginPath();
+				ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2, true);
+				ctx.fillStyle = this.color;
+				ctx.fill();
+			}
+
+			//创建小球对象
+			var balls = []; //存小球对象
+			for(var i = 0; i < 20; i++) {
+				var ball = new Ball();
+				balls.push(ball);
+			}
+
+			//动画
+			function animation() {
+				ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+				for(var i = 0; i < balls.length; i++) {
+					balls[i].move();
+					balls[i].draw();
+				}
+				requestAnimationFrame(animation);
+			}
+			animation();
+		</script>
+	</body>
+
+</html>
