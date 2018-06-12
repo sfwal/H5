@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<input type="text" placeholder="请输入房主姓名" />
+		<input type="button" value="确定" />
+		<button>导出</button><br />
+		<canvas id="my-canvas" width="549" height="412"></canvas>
+
+		<script type="text/javascript">
+			//获取元素
+			var myCanvas = document.getElementById("my-canvas");
+			var ctx = myCanvas.getContext("2d");
+
+			//图片元素
+			var img = new Image();
+			img.src = "img/zheng.jpg";
+			img.onload = function() {
+				//绘制图片
+				ctx.drawImage(img, 0, 0);
+			}
+
+			//确定按钮事件
+			var submitBtn = document.querySelector("input[type=button]");
+
+			submitBtn.onclick = function() {
+				//清除canvas内容
+				ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+				//图片
+				ctx.drawImage(img, 0, 0);
+
+				//文字
+				ctx.fillStyle = "gray";
+				var nameInput = document.querySelector("input[type=text]");
+				ctx.fillText(nameInput.value, 210, 120);
+			}
+
+			//导出按钮事件
+			var exportBtn = document.querySelector("button");
+			exportBtn.onclick = function() {
+				//导出canvas上的图片, 实质: 将图片的数据存到url中
+				var imgURL = myCanvas.toDataURL();
+				//console.log(imgURL);
+				//打开新的窗口
+				window.open(imgURL);
+			}
+		</script>
+	</body>
+
+</html>

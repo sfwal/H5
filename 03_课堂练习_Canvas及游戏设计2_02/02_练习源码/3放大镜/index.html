@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#my-canvas {
+				display: block;
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<canvas id="my-canvas" width="300" height="450"></canvas>
+		<script type="text/javascript">
+			//获取元素
+			var myCanvas = document.getElementById("my-canvas");
+			var ctx = myCanvas.getContext("2d");
+
+			//画图片
+			var img = new Image();
+			img.src = "img/girl2.jpeg";
+			img.onload = function() {
+				//绘制图片
+				ctx.drawImage(img, 0, 0, myCanvas.width, myCanvas.height);
+			}
+
+			myCanvas.onmousedown = function() {
+				myCanvas.onmousemove = function(event) {
+					//清除canvas
+					ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+
+					//画图
+					ctx.drawImage(img, 0, 0, myCanvas.width, myCanvas.height);
+
+					//获取鼠标位置
+					//方式1
+					var x = event.clientX - myCanvas.offsetLeft;
+					var y = event.clientY - myCanvas.offsetTop;
+					console.log(x, y);
+					//方式2
+					var x = event.offsetX;
+					var y = event.offsetY;
+					//event.offsetX, event.offsetY: 鼠标在事件所关联的元素(event.target)中的位置
+
+					//新图部分透明
+					ctx.globalCompositeOperation = "destination-out";
+
+					//画圆
+					ctx.beginPath();
+					ctx.arc(x, y, 100, 0, Math.PI * 2, true);
+					ctx.fill();
+
+					//新图出现在原图的下方
+					ctx.globalCompositeOperation = "destination-over";
+
+					//放大图片
+					ctx.drawImage(img, 2 * x - 100, 2 * y - 100, 200, 200, x - 100, y - 100, 200, 200);
+
+					//重置默认值
+					ctx.globalCompositeOperation = "source-over";
+				}
+			}
+
+			document.onmouseup = function() {
+				ctx.drawImage(img, 0, 0, myCanvas.width, myCanvas.height);
+				myCanvas.onmousemove = null;
+			}
+		</script>
+	</body>
+
+</html>
