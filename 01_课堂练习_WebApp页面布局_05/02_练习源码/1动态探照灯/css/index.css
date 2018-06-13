@@ -1,0 +1,65 @@
+body {
+	background-color: #f5f5f5;
+}
+
+.demo {
+	background: url(../images/main.jpg) 0 0 no-repeat;
+	color: #fff;
+	height: 500px;
+	width: 650px;
+	margin: 1em auto;
+	/*遮罩*/
+	-webkit-mask: center no-repeat;
+	-webkit-mask-image: url(../images/apple.png), url(../images/apple.png), url(../images/apple.png), url(../images/apple.png);
+	-webkit-mask-size: 10%;
+	/*动画*/
+	-webkit-animation: mask-preheat 1s, mask-motion 5s 1s ease-out, demo-motion 2.5s 6s linear infinite;
+	-webkit-animation-fill-mode: none, forwards, none;
+}
+
+@-webkit-keyframes mask-preheat {
+	50% {
+		-webkit-mask-size: 20%, 20%, 20%, 20%;
+	}
+}
+
+@-webkit-keyframes mask-motion {
+	5% {
+		-webkit-mask-position: left top, center, center, center;
+		-webkit-mask-size: 20%, 10%, 10%, 10%;
+	}
+	10% {
+		-webkit-mask-position: left top, right top, center, center;
+		-webkit-mask-size: 20%, 20%, 10%, 10%;
+	}
+	15% {
+		-webkit-mask-position: left top, right top, left bottom, center;
+		-webkit-mask-size: 20%, 20%, 20%, 10%;
+	}
+	20% {
+		-webkit-mask-position: left top, right top, left bottom, right bottom;
+		-webkit-mask-size: 20%, 20%, 20%, 20%;
+	}
+	60% {
+		-webkit-mask-position: left bottom, left top, right bottom, right top;
+		-webkit-mask-size: 20%, 20%, 20%, 20%;
+	}
+	80% {
+		-webkit-mask-position: center;
+		-webkit-mask-size: 10%, 10%, 10%, 10%;
+	}
+	90% {
+		-webkit-mask-position: center;
+		-webkit-mask-size: 20%, 20%, 20%, 20%;
+	}
+	100% {
+		-webkit-mask-position: top, right, bottom, left;
+		-webkit-mask-size: 30%, 30%, 30%, 30%;
+	}
+}
+
+@-webkit-keyframes demo-motion {
+	50% {
+		-webkit-filter: contrast(1.5);
+	}
+}

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- 强制IE浏览器采用最新的edge引擎解析，chrome采用最新版本 -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<!-- 双模式浏览器优先使用 webkit -->
+		<meta name="renderer" content="webkit">
+		<!-- 移动端视窗设置 -->
+		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/> -->
+		<!-- title 标题 -->
+		<title>background-origin</title>
+		<!-- 描述 -->
+		<meta name="description" content="你的描述内容，一段完整的描述，150字以内">
+		<!-- 关键字 -->
+		<meta name="keywords" content="多个关键词用英文,号分割">
+		<!-- 引入CSS -->
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<style type="text/css">
+			img {
+				width: 33%;
+				height: auto;
+				float: left;
+			}
+			
+			.blur {
+				-webkit-filter: blur(4px);
+				filter: blur(4px);
+			}
+			
+			.brightness {
+				-webkit-filter: brightness(0.30);
+				filter: brightness(0.30);
+			}
+			
+			.contrast {
+				-webkit-filter: contrast(180%);
+				filter: contrast(180%);
+			}
+			
+			.grayscale {
+				-webkit-filter: grayscale(100%);
+				filter: grayscale(100%);
+			}
+			
+			.huerotate {
+				-webkit-filter: hue-rotate(180deg);
+				filter: hue-rotate(180deg);
+			}
+			
+			.invert {
+				-webkit-filter: invert(100%);
+				filter: invert(100%);
+			}
+			
+			.opacity {
+				-webkit-filter: opacity(50%);
+				filter: opacity(50%);
+			}
+			
+			.saturate {
+				-webkit-filter: saturate(7);
+				filter: saturate(7);
+			}
+			
+			.sepia {
+				-webkit-filter: sepia(100%);
+				filter: sepia(100%);
+			}
+			
+			.shadow {
+				-webkit-filter: drop-shadow(8px 8px 10px green);
+				filter: drop-shadow(8px 8px 10px green);
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<img src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="blur" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="brightness" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="contrast" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="grayscale" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="huerotate" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="invert" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="opacity" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="saturate" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="sepia" src="images/pic.jpg" alt="风景" width="300" height="300">
+		<img class="shadow" src="images/pic.jpg" alt="风景" width="300" height="300">
+
+	</body>
+
+</html>
