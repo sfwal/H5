@@ -1,0 +1,47 @@
+body {
+	background:url(../img/bg.png) no-repeat;
+}
+
+/*内容*/
+.content {
+	width: 864px;
+	margin: 100px auto 0;
+	/*设置为弹性容器*/
+	display: flex;
+	/*设置主轴对齐方式*/
+	justify-content: space-between;
+}
+/*左侧 ul*/
+.content .content_left_list {
+	width: 446px;
+	height: 424px;
+	/*设置为弹性盒子*/
+	/*-webkit-display: flex;*/
+	display: flex;
+	/*换行*/
+	flex-wrap: wrap;
+	/*设置主轴对齐方式*/
+	justify-content: space-between;
+	/*设置多跟轴线时,交叉轴对齐方式*/
+	align-content: space-between;
+}
+
+/*右侧*/
+.content .content_right_list {
+	width: 410px;
+	height: 424px;
+	/*设置为弹性盒子*/
+	display: flex;
+	/*换行*/
+	flex-wrap: wrap;
+	/*设置主轴对齐方式*/
+	justify-content: space-between;
+	/*多跟轴线时,交叉轴对齐方式*/
+	align-content: space-between;
+}
+
+.content .content_right_list img {
+	height: 139px;
+}
+
+

@@ -1,0 +1,22 @@
+
+
+body {
+	background: url(../img/bg.png) no-repeat;
+}
+
+/*左侧内容*/
+.content_left {
+	width: 446px;
+	margin: 100px auto;
+}
+
+.content_left .content_left_list {
+	/*将 左侧的 ul 设置为弹性容器, 进而设置内部的六个子li*/
+	display: flex;
+	/*换行*/
+	flex-wrap: wrap;
+	/*主轴对齐方式*/
+	justify-content: space-between;
+	/*多根轴线时，交叉轴对齐方式*/
+	align-content: space-between;
+}

@@ -1,0 +1,62 @@
+
+
+.wrap {
+	width: 500px;
+	height: 500px;
+	border: 1px solid darkred;
+	margin: 20px auto;
+	/*设置为弹性容器*/
+	display: flex;
+	/*可以换行*/
+	flex-wrap: wrap;
+	/*交叉轴对齐方式*/
+	align-content: space-around;
+	/*主轴方向的对齐方式*/
+	justify-content: space-between;
+}
+div {
+	color: white;
+	font-size: 50px;
+	text-align: center;
+}
+.wrap_div_100 {
+	width: 100px;
+	height: 100px;
+	background: green;
+	line-height: 100px;
+}
+
+.wrap_div_150 {
+	width: 150px;
+	height: 150px;
+	line-height: 150px;
+}
+.wrap_div_200 {
+	width: 200px;
+	height: 150px;
+	line-height: 150px;
+}
+
+.wrap_div_10 .wrap_div_200 {
+	height: 150px;
+	line-height: 150px;
+}
+
+.wrap_div_6 {
+	background: yellow;
+}
+.wrap_div_7 {
+	background: lightblue;
+}
+.wrap_div_8 {
+	background: gray;
+}
+.wrap_div_9 {
+	background: black;
+}
+.wrap_div_10 {
+	background: cyan;
+}
+
+
+

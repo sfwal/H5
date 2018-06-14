@@ -1,0 +1,40 @@
+
+/*body*/
+body {
+	background: url(../img/bg.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+/*内容 content 部分*/
+.content {
+	width: 460px;
+	margin: 20px auto 0;
+}
+
+/* 上半部分 */
+.content_left_list {
+	/*弹性布局*/
+	display: flex;
+	/*换行*/
+	flex-wrap: wrap;
+	/*主轴方向对齐方式*/
+	justify-content: space-between;
+	/*多跟轴线的交叉轴对齐方式*/
+	align-content: space-between;
+}
+
+/* 下半部分 */
+.content_right_list {
+	margin-top: 5px;
+	/*设置为弹性容器*/
+	display: flex;
+	/*换行*/
+	flex-wrap: wrap;
+	/*主轴方向对齐方式*/
+	justify-content: space-between;
+	/*多跟轴线的交叉轴对齐方式*/
+	align-content: space-between;
+}
+
+
+
