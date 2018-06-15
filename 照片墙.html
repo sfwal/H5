@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+		  *{
+		    margin: 0;
+		    padding: 0;
+		  }
+			#perspective{
+			  perspective: 800px;
+			}
+			body{
+			  background: black;
+			}
+			#wrap{
+			  margin: 200px auto;
+			  height: 200px;
+			  width: 133px;
+			  position: relative;
+			  transform-style: preserve-3d;
+        transform: rotateX(-20deg) rotateY(0deg);
+			}
+			#wrap img{
+			  height: 200px;
+        width: 133px;
+        position: absolute;
+        padding: 10px;
+        border: 1px solid white;
+        cursor: pointer;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function(){
+			  var img = document.getElementsByTagName("img");
+			  var wrap = document.getElementById("wrap");
+			  var deg = 30;
+			  var flag = true;
+			  var nowX,nowY,lastX,lastY,minX,minY;
+			  var roX = -20,roY = 0;
+			  for(var i = 0;i<img.length;i++){
+			    img[i].style.transform ="rotateY("+deg*i+"deg) translateZ(320px)";
+			    img[i].style.transition = "all 1s "+0.1*(12-i)+"s";
+			    img[i].index = i;
+			    img[i].onclick = function(){
+			      if(flag){
+			        this.style.transform = "scale(2) rotateY("+(this.index)*deg+"deg)";
+			        this.style.transition = "all 1s 0s";
+			        flag = false;
+			      }else{
+			        this.style.transform = "scale(1) rotateY("+(this.index)*deg+"deg) translateZ(320px)";
+			        this.style.transition = "all 1s 0s";
+			        flag = true;
+			      }
+			    }
+			  }
+			  
+			  document.onmousedown = function(eve){
+			    var e1 = eve || window.event;
+			      lastX = e1.clientX;
+			      lastY = e1.clientY;
+			    this.onmousemove = function(even){
+			      var e2 = even || window.event;
+			      nowX = e2.clientX;
+			      nowY = e2.clientY;
+			      
+			      minX = nowX-lastX;
+			      minY = nowY-lastY;
+			      
+			      roX +=minX;
+			      roY +=-minY;
+			      
+			      lastX = nowX;
+			      lastY = nowY;
+			      
+			      wrap.style.transform = "rotateX("+roY+"deg) rotateY("+roX+"deg)";
+			    }
+			  }
+			  document.onmouseup = function(){
+			    this.onmousemove = null;
+			  }
+			}
+		</script>
+	</head>
+	<body>
+		<div id="perspective">
+			<div id="wrap">
+				<img src="img/1.jpg" alt="" />
+				<img src="img/2.jpg" alt="" />
+				<img src="img/3.jpg" alt="" />
+				<img src="img/4.jpg" alt="" />
+				<img src="img/5.jpg" alt="" />
+				<img src="img/6.jpg" alt="" />
+				<img src="img/7.jpg" alt="" />
+				<img src="img/8.jpg" alt="" />
+				<img src="img/9.jpg" alt="" />
+				<img src="img/10.jpg" alt="" />
+				<img src="img/11.jpg" alt="" />
+				<img src="img/12.jpg" alt="" />
+			</div>
+		</div>
+	</body>
+</html>
