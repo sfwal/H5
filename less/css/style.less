@@ -1,0 +1,195 @@
+//变量
+@color:#f00;
+h1{
+	color:@color;
+}
+h3{
+	color:@color;
+}
+//混合
+.box-sizing{
+	box-sizing: border-box;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-o-box-sizing:border-box;
+}
+//加上小括号，less不会编译
+.border-radius(){
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius:5px;
+	-o-border-radius:5px;
+}
+
+.div1{
+	.box-sizing;
+}
+.div2{
+	.border-radius
+}
+
+//混合带参数
+.border-radius(@radius){
+	border-radius:@radius;
+	-webkit-border-radius:@radius;
+	-moz-border-radius:@radius;
+	-o-border-radius:@radius;
+}
+.div3{
+	.border-radius(4px);
+}
+
+//混合带默认值参数
+.border-radius1(@radius:6px){
+	border-radius:@radius;
+	-webkit-border-radius:@radius;
+	-moz-border-radius:@radius;
+	-o-border-radius:@radius;
+}
+
+.div4{
+	.border-radius1();
+}
+
+// 注释
+// 这是第一种注释  不会被编译
+/*这是第二种注释  会被编译*/ 
+
+//嵌套
+//
+nav{
+	width: 1000px;
+	height: 40px;
+	border: 1px solid #ddd;
+	ul{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+	}
+	li{
+		float: left;
+		width:100px;
+		border-right:1px solid #ddd;
+		a{
+			color:#000;
+			font-size: 18px;
+			text-decoration: none;
+		}
+	}
+}
+
+.nav{
+	&_con{
+		color:#f00;
+	}
+}
+
+// .sanjiao{
+// 	width:0;
+// 	height:0;
+// 	// border-left:20px dashed transparent;
+// 	// border-right:20px dashed transparent;
+// 	// border-bottom:20px solid #f00;
+// 	border-width: 20px;
+// 	border-color:transparent transparent #f00 transparent;
+// 	border-style: dashed dashed solid dashed;
+// }
+// 
+// 匹配模式
+
+//三角形  角朝上
+.angle(top,@w:20px,@c:#f00){
+	border-width: @w;
+	border-color:transparent transparent @c transparent;
+	border-style: dashed dashed solid dashed;
+}
+.angle(bottom,@w:20px,@c:#f00){
+	border-width: @w;
+	border-color:@c transparent transparent transparent;
+	border-style:solid dashed dashed dashed;
+}
+.angle(left,@w:20px,@c:#f00){
+	border-width: @w;
+	border-color:transparent @c transparent transparent;
+	border-style: dashed solid dashed dashed;
+}
+.angle(right,@w:20px,@c:#f00){
+	border-width: @w;
+	border-color:transparent transparent transparent @c;
+	border-style: dashed dashed dashed solid;
+}
+.angle(@_,@w:20px,@c:#f00){
+	width:0;
+	height:0;
+}
+
+.sanjiao{
+	.angle(top,100px,#000);
+}
+.po(r){
+	position: relative;
+}
+.po(a){
+	position:absolute;
+}
+.po(f){
+	position:fixed;
+}
+.div4{
+	.po(f);
+}
+
+//arguments  使用全部变量
+//
+.border(@width:5px,@style:solid,@color:red){
+	border: @arguments;
+}
+
+h1{
+	.border;
+}
+.bbb(){
+	background:#333;
+}
+//命名空间
+//
+#aaa{
+	.bbb(@color){
+		background: @color;
+	}
+	.ccc{
+		background:#000;
+	}
+	.ddd{
+		background:#0f0;
+		&:hover{
+			color:#f00;
+		}
+	}
+}
+// h1{
+// 	#aaa>.bbb(#f00);
+// }
+//运算
+//
+@width:200px;
+@color:#f00;
+h1{
+	width:@width+40%;
+	color:@color - 200;
+}
+
+//阻止编译
+h1{
+	width:~"calc(100% - 50px)";
+}
+
+//作用域
+@color:#000;
+h2{
+	@color:#999;
+	color:@color;
+}
+h3{
+	color:@color;
+}

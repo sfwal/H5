@@ -1,0 +1,141 @@
+/*
+* @Author: name
+* @Date:   2017-10-30 20:27:02
+* @Last Modified by:   name
+* @Last Modified time: 2017-10-31 15:26:44
+*/
+.case_list li{
+    margin-bottom:30px;
+}
+.case_list li div{
+    padding:10px;
+    background:#fff;
+    border-radius:10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.case_list li img{
+    width:100%;
+}
+.case_list li p{
+    margin:0;
+    font-size:13px;
+    line-height:1;
+    margin-top:12px;
+}
+.case_list li a{
+    color:#6b6b6b;
+    text-decoration:none;
+}
+.case_more{
+    margin:10px 0 30px;
+}
+.case_r .title{
+    margin-bottom: 20px;
+}
+.case_r .title h4{
+    font-size:24px;
+    color:#333;
+    line-height:40px;
+    margin:0;
+}
+.case_r .title p{
+    font-size:14px;
+    color:#999;
+    padding-top: 5px;
+}
+.case_r .txt1{
+    border:1px dashed #cbcaca;
+    border-left:none;
+    border-right:none;
+    padding:12px 0;
+    font-size:14px;
+    color:#999;
+    line-height:1.8;
+}
+.case_r .txt2{
+    border:1px dashed #cbcaca;
+    border-left:none;
+    border-right:none;
+    padding:12px 0;
+    font-size:14px;
+    color:#999;
+    line-height:1.8;
+    margin-bottom:20px;
+}
+.case_r .txt2 span{
+    color:#5b7cff;
+    margin-right:8px;
+}
+.case_r .txt2 a{
+    color:#999;
+    text-decoration: none;
+}
+.slide_img{
+    margin:30px auto;
+    padding:0 40px;
+    position: relative;
+}
+.case_next,.case_prev{
+    width:40px;
+    height: 40px;
+    background-size:100% 100%;
+    margin-top:-20px;
+}
+.case_img .swiper-slide img{
+    width:76px;
+    height:76px;
+    border:2px solid #ddd;
+}
+.case_img .swiper-slide-active img{
+    border:2px solid #e5000c;
+}
+.case_next{
+    background-image:url(../images/case_next.png);
+    right: -10px;
+}
+.case_prev{
+    background-image:url(../images/case_prev.png);
+    left:-10px;
+}
+.case_r{
+    float: right;
+    width:30%;
+}
+.case_l{
+    float:left;
+    width:65%;
+}
+.case_bimg img{
+    width:100%;
+}
+.case_bnext,.case_bprev{
+    width:50px;
+    height: 50px;
+    background-size:100% 100%;
+    margin-top:-25px;
+    opacity: 0.6;
+}
+.case_bnext{
+    background-image:url(../images/case_nexton.png);
+}
+.case_bprev{
+    background-image:url(../images/case_prevon.png);
+}
+
+@media screen and (max-width:992px){
+    .case_l{
+        float:none;
+        width:100%;
+    }
+    .case_r{
+        float: none;
+        width:100%;
+        margin-bottom:30px;
+    }
+    .slide_img{
+        display: none;
+    }
+    .case_r .txt1{
+        border-bottom: none;
+    }
+}
